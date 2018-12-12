@@ -10,7 +10,7 @@ import com.hanmo.dagger2_mvp_example.di.module.ActivityModule
 import org.jetbrains.anko.toast
 import javax.inject.Inject
 
-class SearchActivity : BaseActivity(), BaseView {
+class SearchActivity : BaseActivity(), SearchView {
 
     override fun getContext(): Context {
         return this
@@ -32,7 +32,7 @@ class SearchActivity : BaseActivity(), BaseView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_search)
         searchPresenter.onViewCreated(this)
     }
 

@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Dagger2_MVP_Example</string>
+    <string name="error">Network Error</string>
+    <string name="inputUserNameHint">Input User Name</string>
+    <string name="search">검색</string>
+    <string name="profile">프로필</string>
+    <string name="notResult">결과 없음</string>
 </resources>
