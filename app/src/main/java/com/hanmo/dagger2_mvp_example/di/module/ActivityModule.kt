@@ -1,14 +1,15 @@
 package com.hanmo.dagger2_mvp_example.di.module
 
-import com.hanmo.dagger2_mvp_example.ui.SearchPresenter
+import com.hanmo.dagger2_mvp_example.ui.search.SearchPresenter
 import dagger.Module
 import dagger.Provides
 
 @Module
-object SearchModule {
+object ActivityModule {
 
     @Provides
-    internal fun providePresenter() : SearchPresenter {
+    internal fun provideSearchPresenter() : SearchPresenter {
         return SearchPresenter()
     }
+
 }

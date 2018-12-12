@@ -1,12 +1,12 @@
-package com.hanmo.dagger2_mvp_example.ui
+package com.hanmo.dagger2_mvp_example.ui.search
 
 import android.content.Context
 import android.os.Bundle
 import com.hanmo.dagger2_mvp_example.R
 import com.hanmo.dagger2_mvp_example.base.BaseActivity
 import com.hanmo.dagger2_mvp_example.base.BaseView
-import com.hanmo.dagger2_mvp_example.di.component.DaggerSearchComponent
-import com.hanmo.dagger2_mvp_example.di.module.SearchModule
+import com.hanmo.dagger2_mvp_example.di.component.DaggerActivityComponent
+import com.hanmo.dagger2_mvp_example.di.module.ActivityModule
 import org.jetbrains.anko.toast
 import javax.inject.Inject
 
@@ -24,8 +24,8 @@ class SearchActivity : BaseActivity(), BaseView {
     lateinit var searchPresenter: SearchPresenter
 
     init {
-        DaggerSearchComponent.builder()
-                .searchModule(SearchModule)
+        DaggerActivityComponent.builder()
+                .activityModule(ActivityModule)
                 .build()
                 .inject(this)
     }
@@ -36,5 +36,9 @@ class SearchActivity : BaseActivity(), BaseView {
         searchPresenter.onViewCreated(this)
     }
 
+    override fun onDestroy() {
+        searchPresenter.onViewDestroyed()
+        super.onDestroy()
+    }
 
 }
