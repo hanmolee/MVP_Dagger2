@@ -2,7 +2,8 @@ package com.hanmo.dagger2_mvp_example.di.component
 
 import com.hanmo.dagger2_mvp_example.di.module.ActivityModule
 import com.hanmo.dagger2_mvp_example.di.module.ContextModule
-import com.hanmo.dagger2_mvp_example.ui.ui.SearchActivity
+import com.hanmo.dagger2_mvp_example.ui.repo.RepoActivity
+import com.hanmo.dagger2_mvp_example.ui.search.SearchActivity
 import dagger.Component
 import javax.inject.Singleton
 
@@ -11,4 +12,5 @@ import javax.inject.Singleton
 interface ActivityComponent {
 
     fun inject(searchActivity: SearchActivity)
+    fun inject(repoActivity: RepoActivity)
 }
