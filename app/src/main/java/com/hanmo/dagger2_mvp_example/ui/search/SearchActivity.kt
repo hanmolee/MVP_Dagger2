@@ -43,7 +43,7 @@ class SearchActivity : BaseActivity(), SearchView {
                 .throttleFirst(500, TimeUnit.MILLISECONDS, AndroidSchedulers.mainThread())
                 .filter { userInfoForm.visibility == View.VISIBLE }
                 .subscribe {
-
+                    searchPresenter.clickUserInfo()
                 }
                 .apply { searchPresenter.compositeDisposable.add(this) }
     }

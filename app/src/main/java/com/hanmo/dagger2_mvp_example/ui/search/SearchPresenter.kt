@@ -15,6 +15,8 @@ class SearchPresenter : BasePresenter<SearchView>() {
 
     private var searchView : SearchView? = null
 
+    private var userName : String? = null
+
     val compositeDisposable : CompositeDisposable by lazy { CompositeDisposable() }
 
     override fun onViewCreated(view: SearchView) {
@@ -26,17 +28,28 @@ class SearchPresenter : BasePresenter<SearchView>() {
         apiService.getUserInfo(userNameText)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .doOnError { searchView?.hideLoading() }
+                .doOnError {
+                    searchView?.hideLoading()
+                    userName = null
+                }
                 .subscribe(
                         { userInfo ->
                             userInfo?.run {
                                 searchView?.showUserInfo(userInfo)
+                                userName = userInfo.login
                             } ?: kotlin.run {
                                 searchView?.showNotResult()
+                                userName = null
                             }
                         }, { error -> searchView?.showError(error.toString()) }
                 )
                 .apply { compositeDisposable.add(this) }
+    }
+
+    fun clickUserInfo() {
+        userName?.let { userName ->
+            searchView?.startNextActivity(userName)
+        }
     }
 
     override fun onViewDestroyed() {
