@@ -22,15 +22,22 @@ class RepoActivity : BaseActivity(), RepoView {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_repo)
 
+        initRecyclerView()
+        setRefresh()
+
+        repoPresenter.onViewCreated(this)
+    }
+
+    private fun initRecyclerView() {
         with(repoList) {
             adapter = repoAdapter
         }
+    }
 
+    private fun setRefresh() {
         refreshLayout.setOnRefreshListener {
             repoPresenter.loadRepo()
         }
-
-        repoPresenter.onViewCreated(this)
     }
 
     override fun onDestroy() {

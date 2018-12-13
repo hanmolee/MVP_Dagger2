@@ -21,6 +21,8 @@ class SearchPresenter : BasePresenter<SearchView>() {
 
     override fun onViewCreated(view: SearchView) {
         searchView = view
+
+        searchView?.initButton()
     }
 
     fun searchUserInfo(userNameText : String) {
@@ -32,6 +34,7 @@ class SearchPresenter : BasePresenter<SearchView>() {
                     searchView?.hideLoading()
                     userName = null
                 }
+                .doOnSuccess { searchView?.hideLoading() }
                 .subscribe(
                         { userInfo ->
                             userInfo?.run {

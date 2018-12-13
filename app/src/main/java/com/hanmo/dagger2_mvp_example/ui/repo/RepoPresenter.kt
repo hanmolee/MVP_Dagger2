@@ -29,12 +29,13 @@ class RepoPresenter : BasePresenter<RepoView>() {
         apiService.getRepo(repoView?.getUserName()!!)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
+                .doOnSuccess { repoView?.hideRefreshing() }
+                .doOnError { repoView?.hideRefreshing() }
                 .subscribe(
                         { repoList ->
-                            Log.e("haha", repoList.toString())
-                            repoList?.run { repoView?.updateRepo(repoList) }
-                                    ?: kotlin.run {  }
-                            repoView?.hideRefreshing()
+                            repoList?.run {
+                                repoView?.updateRepo(repoList)
+                            }
                         }, { repoView?.showError(R.string.error) }
                 )
                 .apply { compositeDisposable.add(this) }
